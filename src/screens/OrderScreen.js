@@ -9,14 +9,14 @@ import {
 } from 'react-native';
 
 const OrderScreen = props => {
-  const Arr = [
-    { id: 1, title: 'Pancakes and Eggs' },
-    { id: 2, title: 'Biscuits and Gravy' },
+  const meals = [
+    { id: '1', title: 'Pancakes and Eggs' },
+    { id: '2', title: 'Biscuits and Gravy' },
   ];
 
   return (
     <FlatList
-      data={Arr}
+      data={meals}
       renderItem={itemData => {
         return (
           <View style={styles.cardContainer}>
@@ -25,6 +25,7 @@ const OrderScreen = props => {
               onPress={() => {
                 props.navigation.navigate('Single Meal', {
                   mealId: itemData.item.id,
+                  title: itemData.item.title,
                 });
               }}>
               <Text style={styles.title}>{itemData.item.title}</Text>

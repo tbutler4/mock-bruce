@@ -1,25 +1,52 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 
 const OrderScreen = props => {
+  const Arr = [
+    { id: 1, title: 'Pancakes and Eggs' },
+    { id: 2, title: 'Biscuits and Gravy' },
+  ];
+
   return (
-    <View style={styles.container}>
-      <Text>This is my Order Screen!</Text>
-      <Button
-        title='Go To Single'
-        onPress={() => {
-          props.navigation.navigate('Single Meal');
-        }}
-      />
-    </View>
+    <FlatList
+      data={Arr}
+      renderItem={itemData => {
+        return (
+          <View style={styles.cardContainer}>
+            <TouchableOpacity
+              style={styles.card}
+              onPress={() => {
+                props.navigation.navigate('Single Meal', {
+                  mealId: itemData.item.id,
+                });
+              }}>
+              <Text style={styles.title}>{itemData.item.title}</Text>
+            </TouchableOpacity>
+          </View>
+        );
+      }}
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  card: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#333',
+    margin: 10,
+    padding: 20,
+  },
+  title: {
+    color: '#eee',
   },
 });
 

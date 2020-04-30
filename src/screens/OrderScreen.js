@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import MealContext from '../context/Context';
+
 import {
   View,
   Text,
@@ -9,10 +11,8 @@ import {
 } from 'react-native';
 
 const OrderScreen = props => {
-  const meals = [
-    { id: '1', title: 'Pancakes and Eggs' },
-    { id: '2', title: 'Biscuits and Gravy' },
-  ];
+  const { state, changeName, addMealToOrder } = useContext(MealContext);
+  const meals = state.meals;
 
   return (
     <FlatList
@@ -23,10 +23,7 @@ const OrderScreen = props => {
             <TouchableOpacity
               style={styles.card}
               onPress={() => {
-                props.navigation.navigate('Single Meal', {
-                  mealId: itemData.item.id,
-                  title: itemData.item.title,
-                });
+                changeName(itemData.item);
               }}>
               <Text style={styles.title}>{itemData.item.title}</Text>
             </TouchableOpacity>

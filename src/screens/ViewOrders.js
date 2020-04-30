@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import MealContext from '../context/Context';
 
 const ViewOrdersScreen = props => {
+  const { state, removeOrder } = useContext(MealContext);
+  const orders = state.orders;
+
   return (
     <View style={styles.container}>
-      <Text>This is my View Orders Screen!</Text>
+      <Text>Add an Order List to me!</Text>
     </View>
   );
 };
@@ -12,8 +16,9 @@ const ViewOrdersScreen = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    margin: 10,
     justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
